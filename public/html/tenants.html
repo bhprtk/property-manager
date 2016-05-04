@@ -1,0 +1,82 @@
+
+<!---             EDIT PROPERTY           -->
+
+<div class="col-md-3" ng-if="tenantToEdit">
+  <form ng-submit="createTenant()" name="addForm">
+    <h4>Add tenant</h4>
+    <br>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Name" ng-model="tenantToEdit.name" required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Email" ng-model="tenantToEdit.email" required>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Phone" ng-model="tenantToEdit.phone" required>
+    </div>
+    <button class="btn btn-danger edit-button" ng-click="cancelEdit()">Cancel</button>
+    <button class="btn btn-primary edit-button" ng-click="saveEdit()">Save</button>
+  </form>
+
+</div>
+
+
+<!--              CREATE PROPERTY                -->
+
+<div class="col-md-3" ng-hide="tenantToEdit">
+  <form ng-submit="createTenant()" name="addForm">
+    <h4>Add tenant</h4>
+    <br>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Name" ng-model="newTenant.name" required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Email" ng-model="newTenant.email" required>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Phone" ng-model="newTenant.phone" required>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary add">add</button>
+    </div>
+  </form>
+
+</div>
+
+
+<div class="col-md-9">
+
+  <!--             SEARCH BAR              -->
+
+  <div class="form-group">
+    <input type="text" class="form-control search" placeholder="Search..." ng-model='searchFilter'>
+  </div>
+
+  <!--            TABLE                  -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="tenant in tenants | filter:searchFilter track by $index">
+        <td>{{tenant.name}}</td>
+        <td>{{tenant.email}}</td>
+        <td>{{tenant.phone}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-click='removeTenant(tenant)'>
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          <button type="button" class="btn btn-primary" ng-click='editTenant(tenant)'>
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

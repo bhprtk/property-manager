@@ -1,0 +1,24 @@
+.navbar-default {
+  height: 100px;
+  padding-top: 20px;
+}
+.navbar-brand {
+  font-size: 24px;
+}
+.navbar-right {
+  margin-right: 20px;
+  font-size: 24px;
+}
+.jumbotron {
+  height: 500px;
+  margin-top: 50px;
+}
+.add {
+  width: 100%;
+}
+.btn-danger {
+  background: #990000;
+}
+.edit-button {
+  width: 45%;
+}

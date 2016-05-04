@@ -1,0 +1,131 @@
+
+<!---             EDIT PROPERTY           -->
+
+<div class="col-md-3" ng-if="propertyToEdit">
+  <h4>Edit property</h4>
+  <br>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Apartment" ng-model="propertyToEdit.apartment" required>
+  </div>
+  <div class="form-group">
+    <select type="text" class="form-control" ng-model="propertyToEdit.status" required>
+      <option>Vacant</option>
+      <option>Occupied</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" placeholder="Rent" ng-model="propertyToEdit.rent" required>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" placeholder="Utilities" ng-model="propertyToEdit.utilities" required>
+  </div>
+  <button class="btn btn-danger edit-button" ng-click="cancelEdit()">Cancel</button>
+  <button class="btn btn-primary edit-button" ng-click="saveEdit()">Save</button>
+
+</div>
+
+
+<!--              CREATE PROPERTY                -->
+
+<div class="col-md-3" ng-hide="propertyToEdit">
+  <form ng-submit="createProperty()" name="addForm">
+    <h4>Add property</h4>
+    <br>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Apartment" ng-model="newProperty.apartment" required>
+    </div>
+    <div class="form-group">
+      <select type="text" class="form-control" ng-model="newProperty.status" required>
+        <option>Vacant</option>
+        <option>Occupied</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Rent" ng-model="newProperty.rent" required>
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Utilities" ng-model="newProperty.utilities" required>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary add">add</button>
+    </div>
+  </form>
+
+  <hr>
+  <div>
+    <button class="btn btn-primary btn-sm edit-button" ng-click="rentClick()">rent</button>
+    <button class="btn btn-primary btn-sm edit-button" ng-click="utilitiesClick()">utilities</button>
+  </div>
+  <br>
+
+  <div ng-if="openSortUtilities">
+    <h4>Sort utilities</h4>
+    <form ng-submit="sortUtilFunc()" name="sortForm">
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="min" ng-model="sortUtil.min" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="max" ng-model="sortUtil.max" required>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary add">sort</button>
+      </div>
+    </form>
+  </div>
+
+  <div ng-hide="openSortUtilities">
+    <h4>Sort rent</h4>
+    <form ng-submit="sortRentFunc()" name="sortForm">
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="min" ng-model="sortRent.min" required>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="max" ng-model="sortRent.max" required>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary add">sort</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+<div class="col-md-9">
+
+  <!--             SEARCH BAR              -->
+
+  <div class="form-group">
+    <input type="text" class="form-control search" placeholder="Search..." ng-model='searchFilter'>
+  </div>
+
+  <!--            TABLE                  -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th ng-click='sortBy("apartment")'>Apartment<span class="caret"></span></th>
+        <th ng-click='sortBy("status")'>Status<span class="caret"></span></th>
+        <th ng-click='sortBy("rent")'>Rent<span class="caret"></span></th>
+        <th ng-click='sortBy("utilities")'>Utilities<span class="caret"></span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="property in properties | filter:searchFilter | orderBy:sortOrder track by $index">
+        <td>{{property.apartment}}</td>
+        <td>{{property.status}}</td>
+        <td>{{property.rent | currency}}</td>
+        <td>{{property.utilities | currency}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" ng-click='removeProperty(property)'>
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+          <button type="button" class="btn btn-primary" ng-click='editProperty(property)'>
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

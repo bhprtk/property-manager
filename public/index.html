@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Property Manager</title>
+
+  <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animate.css">
+</head>
+<body ng-app="propertyApp">
+  <nav class="navbar navbar-default">
+    <a class="navbar-brand" href="#">property manager</a>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a ui-sref="properties" class="fa fa-building">  Properties</a></li>
+      <li><a ui-sref="tenants" class="fa fa-users">  Tenants</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <ui-view> </ui-view>
+
+
+
+
+
+
+
+  </div><!-- /.container -->
+
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+  <script src="/js/module.js"></script>
+  <script src="/js/controllers.js"></script>
+  <script src="/js/services.js"></script>
+</body>
+</html>
