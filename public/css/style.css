@@ -16,9 +16,17 @@
 .add {
   width: 100%;
 }
-.btn-danger {
-  background: #990000;
-}
+
 .edit-button {
   width: 45%;
+}
+
+
+.vacant-search-bar {
+  min-width: 85%;
+}
+
+.table-buttons {
+  /*margin-top: -10px;*/
+  border-radius: 10%;
 }

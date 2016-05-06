@@ -7,16 +7,38 @@ app.controller('homeController', function() {
 
 });
 
-app.controller('tenantsController', function($scope, Tenants) {
+app.controller('tenantsController', function($scope, Tenants, Properties) {
+
+  var propertyToAdd;
+
+  $scope.falsifyGetAvailable = () => {
+    $scope.getAvailable = false;
+    $scope.displayPropertyName = null;
+  };
+  $scope.addProperty = (property) => {
+    propertyToAdd = property;
+    $scope.displayPropertyName = property.apartment;
+    $scope.getAvailable = false;
+  };
+
+  $scope.availableList = () => {
+    $scope.getAvailable = true;
+    Properties.getAllAvailable()
+      .then(res => {
+        $scope.listVacant = res.data;
+      });
+  };
   Tenants.getAll()
     .then(res => {
       $scope.tenants = res.data;
     });
 
   $scope.createTenant = () => {
+    $scope.newTenant.property = propertyToAdd;
     Tenants.create($scope.newTenant)
       .then(res => {
         $scope.tenants.push(res.data);
+        $scope.displayPropertyName = null;
         $scope.newTenant = {};
       });
   };

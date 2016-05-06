@@ -1,7 +1,7 @@
 
 <!---             EDIT PROPERTY           -->
 
-<div class="col-md-3" ng-if="propertyToEdit">
+<div class="col-md-3 left" ng-if="propertyToEdit">
   <h4>Edit property</h4>
   <br>
   <div class="form-group">
@@ -27,7 +27,7 @@
 
 <!--              CREATE PROPERTY                -->
 
-<div class="col-md-3" ng-hide="propertyToEdit">
+<div class="col-md-3 left" ng-hide="propertyToEdit">
   <form ng-submit="createProperty()" name="addForm">
     <h4>Add property</h4>
     <br>
@@ -52,10 +52,10 @@
   </form>
 
   <hr>
-  <div>
-    <button class="btn btn-primary btn-sm edit-button" ng-click="rentClick()">rent</button>
-    <button class="btn btn-primary btn-sm edit-button" ng-click="utilitiesClick()">utilities</button>
-  </div>
+  <ul class="nav nav-tabs nav-justified">
+    <li> <a ng-click="rentClick()">rent</a></li>
+    <li> <a ng-click="utilitiesClick()">utilities</a></li>
+  </ul>
   <br>
 
   <div ng-if="openSortUtilities">
@@ -90,6 +90,8 @@
 
 </div>
 
+<div class="col-md-3"></div>
+
 
 <div class="col-md-9">
 
@@ -112,19 +114,19 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="property in properties | filter:searchFilter | orderBy:sortOrder track by $index">
+      <tr ng-repeat="property in properties | filter:searchFilter | orderBy:sortOrder track by $index" ng-click='editProperty(property)'>
         <td>{{property.apartment}}</td>
         <td>{{property.status}}</td>
         <td>{{property.rent | currency}}</td>
         <td>{{property.utilities | currency}}</td>
-        <td>
-          <button type="button" class="btn btn-danger" ng-click='removeProperty(property)'>
+        <!-- <td>
+          <button type="button" class="btn btn-success btn-sm table-buttons" ng-click='removeProperty(property)'>
             <span class="glyphicon glyphicon-remove"></span>
           </button>
-          <button type="button" class="btn btn-primary" ng-click='editProperty(property)'>
+          <button type="button" class="btn btn-primary btn-sm table-buttons" ng-click='editProperty(property)'>
             <span class="glyphicon glyphicon-edit"></span>
           </button>
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>

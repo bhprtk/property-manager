@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
@@ -6,7 +8,7 @@ var Property = require('../models/property');
 // /property/
 
 router.post('/', (req, res) => {
-  var newProperty = new Property(req.body);
+var newProperty = new Property(req.body);
   newProperty.save((err, savedProperty) => {
     res.status(err ? 400 : 200).send(err || savedProperty);
   });
@@ -29,6 +31,14 @@ router.get('/rent-min-max', (req, res) => {
 router.get('/util-min-max', (req, res) => {
   Property
     .find({rent: {$gte: req.query.min, $lte: req.query.max}})
+    .exec((err, properties) => {
+      res.status(err ? 400 : 200).send(err || properties);
+    });
+});
+
+router.get('/get-available', (req, res) => {
+  Property
+    .find({"status": "Vacant"})
     .exec((err, properties) => {
       res.status(err ? 400 : 200).send(err || properties);
     });

@@ -1,0 +1,13 @@
+{"_id":{"$oid":"572973ae6d6183de2709526a"},"apartment":"2D","status":"Vacant","rent":1000,"utilities":500,"__v":0}
+{"_id":{"$oid":"57297aa48dc4cf6e2a06db64"},"apartment":"24","status":"Vacant","rent":2400,"utilities":700,"__v":0}
+{"_id":{"$oid":"57297b4063fc50b02ae3e881"},"apartment":"32","status":"Occupied","rent":1300,"utilities":200,"__v":0}
+{"_id":{"$oid":"57297c3a532a95ce2b9c3b12"},"apartment":"42","status":"Occupied","rent":900,"utilities":100,"__v":0}
+{"_id":{"$oid":"57297c6f45e83de02b336abe"},"apartment":"88","status":"Vacant","rent":1300,"utilities":500,"__v":0}
+{"_id":{"$oid":"57297ce7585cea122ceb6510"},"apartment":"48","status":"Occupied","rent":990,"utilities":330,"__v":0}
+{"_id":{"$oid":"572992dd72e6dfef3026826e"},"apartment":"1A","status":"Vacant","rent":1234,"utilities":112,"__v":0}
+{"_id":{"$oid":"572992e872e6dfef3026826f"},"apartment":"asdf","status":"Vacant","rent":2134,"utilities":1234,"__v":0}
+{"_id":{"$oid":"572992ee72e6dfef30268270"},"apartment":"sdfg","status":"Occupied","rent":124,"utilities":1234,"__v":0}
+{"_id":{"$oid":"572992fc72e6dfef30268271"},"apartment":"asdf","status":"Occupied","rent":12234,"utilities":234,"__v":0}
+{"_id":{"$oid":"5729930b72e6dfef30268272"},"apartment":"asdfasd","status":"Occupied","rent":12341234,"utilities":1234123,"__v":0}
+{"_id":{"$oid":"5729930b72e6dfef30268273"},"apartment":"new","status":"Occupied","rent":12341234,"utilities":1234123,"__v":0}
+{"_id":{"$oid":"5729930b72e6dfef30268223"},"apartment":"hahahahaha","status":"Occupied","rent":12341234,"utilities":1234123,"__v":0}

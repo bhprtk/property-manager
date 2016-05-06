@@ -1,19 +1,28 @@
 
-<!---             EDIT PROPERTY           -->
+<!---             EDIT TENANTS           -->
 
 <div class="col-md-3" ng-if="tenantToEdit">
   <form ng-submit="createTenant()" name="addForm">
-    <h4>Add tenant</h4>
+    <h4>Edit tenant</h4>
     <br>
     <div class="form-group">
+      <label>Name</label>
       <input type="text" class="form-control" placeholder="Name" ng-model="tenantToEdit.name" required>
     </div>
+    <div class="form-group form-inline">
+      <label>Property</label>
+      <input type="text" class="form-control property-input" ng-model="tenantToEdit.property[0].apartment" readonly>
+      <button type="button" class="btn btn-success fa fa-forward" ng-click="availableList()"></button>
+    </div>
     <div class="form-group">
+      <label>Email</label>
       <input type="text" class="form-control" placeholder="Email" ng-model="tenantToEdit.email" required>
     </div>
     <div class="form-group">
+      <label>Phone</label>
       <input type="number" class="form-control" placeholder="Phone" ng-model="tenantToEdit.phone" required>
     </div>
+
     <button class="btn btn-danger edit-button" ng-click="cancelEdit()">Cancel</button>
     <button class="btn btn-primary edit-button" ng-click="saveEdit()">Save</button>
   </form>
@@ -21,7 +30,7 @@
 </div>
 
 
-<!--              CREATE PROPERTY                -->
+<!--              CREATE TENANTS                -->
 
 <div class="col-md-3" ng-hide="tenantToEdit">
   <form ng-submit="createTenant()" name="addForm">
@@ -29,6 +38,10 @@
     <br>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Name" ng-model="newTenant.name" required>
+    </div>
+    <div class="form-group form-inline">
+      <input type="text" class="form-control property-input" placeholder="Property" ng-model="displayPropertyName" readonly>
+      <button type="button" class="btn btn-success fa fa-forward" ng-click="availableList()"></button>
     </div>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Email" ng-model="newTenant.email" required>
@@ -43,40 +56,84 @@
 
 </div>
 
-
 <div class="col-md-9">
 
-  <!--             SEARCH BAR              -->
+<!--          VACANT LIST          -->
 
-  <div class="form-group">
-    <input type="text" class="form-control search" placeholder="Search..." ng-model='searchFilter'>
+<div ng-show="getAvailable" class="vacant-list">
+
+
+  <!--           VACANT LIST SEARCH BAR              -->
+
+  <div class="form-group form-inline">
+      <button class="btn btn-success" ng-click="falsifyGetAvailable()">Cancel</button>
+      <input type="text" class="form-control vacant-search-bar" placeholder="Search vacant..." ng-model='vacantSearchFilter'>
+  </div>
+
+
+
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th ng-click='sortBy("apartment")'>Apartment<span class="caret"></span></th>
+          <th ng-click='sortBy("status")'>Status<span class="caret"></span></th>
+          <th ng-click='sortBy("rent")'>Rent<span class="caret"></span></th>
+          <th ng-click='sortBy("utilities")'>Utilities<span class="caret"></span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="property in listVacant | filter:vacantSearchFilter | orderBy:sortOrder track by $index" ng-click="addProperty(property)">
+          <td>{{property.apartment}}</td>
+          <td>{{property.status}}</td>
+          <td>{{property.rent | currency}}</td>
+          <td>{{property.utilities | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   </div>
 
   <!--            TABLE                  -->
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
+  <div ng-hide="getAvailable">
 
-    <tbody>
-      <tr ng-repeat="tenant in tenants | filter:searchFilter track by $index">
-        <td>{{tenant.name}}</td>
-        <td>{{tenant.email}}</td>
-        <td>{{tenant.phone}}</td>
-        <td>
-          <button type="button" class="btn btn-danger" ng-click='removeTenant(tenant)'>
-            <span class="glyphicon glyphicon-remove"></span>
-          </button>
-          <button type="button" class="btn btn-primary" ng-click='editTenant(tenant)'>
-            <span class="glyphicon glyphicon-edit"></span>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <!--           TABLE SEARCH BAR              -->
+
+    <div class="form-group">
+      <input type="text" class="form-control search" placeholder="Search..." ng-model='searchFilter'>
+    </div>
+
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Property</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="tenant in tenants | filter:searchFilter track by $index">
+          <td>{{tenant.name}}</td>
+          <td>{{tenant.email}}</td>
+          <td>{{tenant.phone}}</td>
+          <td>{{tenant.property[0].apartment}}</td>
+          <td>
+            <button type="button" class="btn btn-danger" ng-click='removeTenant(tenant)'>
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button type="button" class="btn btn-primary" ng-click='editTenant(tenant)'>
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
