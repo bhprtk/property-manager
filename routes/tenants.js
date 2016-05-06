@@ -34,14 +34,14 @@ router.put('/:id', (req, res) => {
         new: true
     }, (err, tenant) => {
         res.status(err ? 400 : 200).send(err || tenant);
-    });
+    }).populate('property');
 });
 
 router.delete('/:id', (req, res) => {
   var tenantId = req.params.id;
 
   Tenant.findById(tenantId, (err, tenant) => {
-    console.log('tenant.property:',tenant.property);
+    console.log('tenant:',tenant);
   }).populate('tenant');
 
   Property.findByIdAndUpdate(req.params.id, { $set: {status: 'Vacant'}}, {new: true}, (err, property) => {
